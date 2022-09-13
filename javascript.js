@@ -4,7 +4,8 @@ let sign = ''
 let buttons = document.querySelectorAll("button");
 let screen = document.querySelector(`#screen`);
 let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-let operators = ["+", "-", "*", "/"]
+let operators = ["+", "-", "*", "/"];
+let errortext = "destroyed universe";
 
 function add(a, b) {
     return a + b;
@@ -19,6 +20,10 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
+    if (b == 0) {
+        a = errortext;
+        return a
+    }
     return a / b;
 }
 
@@ -28,16 +33,12 @@ function operate(a, b, sign) {
     switch (sign) {
         case "+":
             return (add(a, b));
-            break;
         case "-":
             return (subtract(a, b));
-            break;
         case "*":
             return (multiply(a, b));
-            break;
         case "/":
             return (divide(a, b));
-            break;
     }
 }
 
@@ -51,6 +52,7 @@ for (i = 0; i < buttons.length; i++) {
 
 function buttonPress(which) {
     console.log(which);
+    if (a == errortext) clearScreen();
     if (which == "CLR") {
         clearScreen();
     } else if (operators.includes(which)) {
