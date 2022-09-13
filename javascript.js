@@ -49,7 +49,6 @@ function operate(a, b, sign) {
 }
 
 function buttonPress(which) {
-    console.log(which);
     if (a == errortext) clearScreen();
     if (which == "CLR") {
         clearScreen();
@@ -60,9 +59,13 @@ function buttonPress(which) {
         }
         sign = which;
     } else if (which == "=") {
-        a = operate(a, b, sign);
-        sign = '';
-        b = '';
+        if (!b) {
+            sign = '';
+        } else {
+            a = operate(a, b, sign);
+            sign = '';
+            b = '';
+        }
     } else {
         if (!sign) {
             if (a == 0) a = which;
