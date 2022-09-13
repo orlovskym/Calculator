@@ -7,6 +7,12 @@ let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 let operators = ["+", "-", "*", "/"];
 let errortext = "destroyed universe";
 
+for (i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('click', e => {
+        buttonPress(e.target.innerText);
+    })
+}
+
 function add(a, b) {
     return a + b;
 }
@@ -42,14 +48,6 @@ function operate(a, b, sign) {
     }
 }
 
-
-for (i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener('click', e => {
-        buttonPress(e.target.innerText);
-    })
-}
-
-
 function buttonPress(which) {
     console.log(which);
     if (a == errortext) clearScreen();
@@ -57,7 +55,7 @@ function buttonPress(which) {
         clearScreen();
     } else if (operators.includes(which)) {
         if (b) {
-            a = operate(a,b,sign);
+            a = operate(a, b, sign);
             b = '';
         }
         sign = which;
@@ -70,7 +68,10 @@ function buttonPress(which) {
             if (a == 0) a = which;
             else a += which;
         }
-        if (sign) b += which;
+        if (sign) {
+            if (b == 0) b = which;
+            else b += which;
+        }
     }
     updateScreen();
 }
