@@ -56,6 +56,10 @@ function buttonPress(which) {
     if (which == "CLR") {
         clearScreen();
     } else if (operators.includes(which)) {
+        if (b) {
+            a = operate(a,b,sign);
+            b = '';
+        }
         sign = which;
     } else if (which == "=") {
         a = operate(a, b, sign);
